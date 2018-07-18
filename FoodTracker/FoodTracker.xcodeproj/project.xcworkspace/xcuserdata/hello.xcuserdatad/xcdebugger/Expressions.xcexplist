@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VariablesViewState
+   version = "1.0">
+   <ContextStates>
+      <ContextState
+         contextName = "-[ViewController prepareForSegue:sender:]:ViewController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.photoImageView.image">
+            </PersistentString>
+            <PersistentString
+               value = "_nameTextField.text">
+            </PersistentString>
+            <PersistentString
+               value = "self.ratingControl.rating">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[MealTableViewController unwindToMelList:]:MealTableViewController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "meals.count">
+            </PersistentString>
+            <PersistentString
+               value = "self.tableView">
+            </PersistentString>
+            <PersistentString
+               value = "selectedIndexPath.row">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+   </ContextStates>
+</VariablesViewState>
