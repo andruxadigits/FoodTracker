@@ -53,12 +53,12 @@
 }
 //:MARK: Navigation
 - (IBAction)cancel:(UIBarButtonItem *)sender {
-    UINavigationController *isPresentingInAddMealMode = self.presentingViewController;
-    UINavigationController *owningNavigationController;
+    UIViewController *isPresentingInAddMealMode = self.presentingViewController;
+    UINavigationController *owningNavigationController = self.navigationController;
     if (isPresentingInAddMealMode){
         [self dismissViewControllerAnimated:true completion:nil];
     }
-    else if (owningNavigationController = self.navigationController)
+    else if (owningNavigationController)
     {
         [owningNavigationController popViewControllerAnimated:true];
     }
@@ -85,7 +85,7 @@
     if ((button=sender)&&(button==self.saveButton)) {
         NSString *name = _nameTextField.text;
         UIImage *photo = _photoImageView.image;
-        NSNumber *rating = [NSNumber numberWithInt:_ratingControl.rating];
+        NSNumber *rating = [NSNumber numberWithInteger:_ratingControl.rating];
         self.meal=[[Meal alloc] initWithName:name photo:photo rating:rating];
     }else
     {

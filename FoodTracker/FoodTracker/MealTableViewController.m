@@ -88,8 +88,8 @@
     ViewController *sourceViewController=sender.sourceViewController;
     if ([sourceViewController isKindOfClass:[ViewController class]])
     {
-        NSIndexPath *selectedIndexPath;
-        if (selectedIndexPath=self.tableView.indexPathForSelectedRow)
+        NSIndexPath *selectedIndexPath=self.tableView.indexPathForSelectedRow;
+        if (selectedIndexPath)
         {
             //Update an existing meal.
             meals[selectedIndexPath.row] = sourceViewController.meal;
@@ -113,9 +113,9 @@
     BOOL isSuccessfulSave=[NSKeyedArchiver archiveRootObject:meals toFile:[Meal archiveURL]];
     if (isSuccessfulSave)
     {
-        os_log_debug(OS_LOG_TYPE_DEFAULT, "Meals successfully saved.");
+        os_log_debug(OS_LOG_DEFAULT, "Meals successfully saved.");
     }else{
-        os_log_error(OS_LOG_TYPE_DEFAULT, "Failed to save meals...");
+        os_log_error(OS_LOG_DEFAULT, "Failed to save meals...");
     }
 }
 -(NSMutableArray *) loadMeals{
@@ -131,7 +131,7 @@
     [super prepareForSegue:segue sender:sender];
     UIViewController *viewController = [segue destinationViewController];
     if ([viewController isKindOfClass:[ViewController class]]) {
-        ViewController *mealDetailViiwController = viewController;
+        ViewController *mealDetailViiwController = (ViewController *)viewController;
         MealTableViewCell *selectedMealCell =sender;
         NSIndexPath *indexPath = [self.tableView indexPathForCell:selectedMealCell];
         Meal *selectedMeal = [meals objectAtIndex:indexPath.row];
