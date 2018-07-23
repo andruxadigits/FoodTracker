@@ -1,15 +1,15 @@
 #import "RatingControl.h"
 
-@interface RatingControl(){
-    //MARK: Properties
-    NSMutableArray *ratingButtons;
-}
+@interface RatingControl()
 @property (nonatomic, assign) IBInspectable CGSize starSize;
 @property (nonatomic, assign) IBInspectable int starCount;
 @end
 
 
-@implementation RatingControl
+@implementation RatingControl{
+    NSMutableArray *ratingButtons;
+
+}
 
 //MARK: Init
 - (instancetype) initWithFrame:(CGRect)frame{
@@ -17,7 +17,17 @@
     if (self) {
         self.starSize=CGSizeMake(44.0, 44.0);
         self.starCount=5;
+        self.spacing =8;
         [self updateButtonSelectionStates];
+        CGFloat width = [UIScreen mainScreen].bounds.size.width;
+        if (width >90+(self.starCount+1)*8+44.0*self.starCount){
+    //        [self setDistribution:UIStackViewDistributionFill];
+        }
+        else
+        {
+   //         [self setDistribution:UIStackViewDistributionFillEqually];
+            self.starSize=CGSizeMake((width-(90+(self.starCount+1)*8))/self.starCount, (width-(90+(self.starCount+1)*8))/self.starCount);
+        }
         [self setupButtons];
     }
     return self;
@@ -27,10 +37,21 @@
     if (self) {
         self.starSize=CGSizeMake(44.0, 44.0);
         self.starCount=5;
+        self.spacing =8;
+        CGFloat width = [UIScreen mainScreen].bounds.size.width;
+        if (width >90+(self.starCount+1)*8+44.0*self.starCount){
+         //   [self setDistribution:UIStackViewDistributionFillProportionally];
+        }
+        else
+        {
+    //        [self setDistribution:UIStackViewDistributionFillEqually];
+            self.starSize=CGSizeMake((width-(90+(self.starCount+1)*8))/self.starCount, (width-(90+(self.starCount+1)*8))/self.starCount);
+        }
         [self setupButtons];
     }
     return self;
 }
+
 //MARK: Private Methods
 -(void)setupButtons{
     for (int i=0;i<[ratingButtons count];i++)
@@ -56,7 +77,6 @@
         [self addArrangedSubview:button];
         [ratingButtons addObject:button];
     }
-    [self updateButtonSelectionStates];
 }
 
 -(void)setRating:(NSUInteger)rating {

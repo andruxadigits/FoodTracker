@@ -20,6 +20,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
     self.navigationItem.leftBarButtonItem = self.editButtonItem;
     NSMutableArray *savedMeals=[self loadMeals];
     if (savedMeals)
@@ -67,18 +68,17 @@
     return meals.count;
 }
 
-
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     NSString *cellIdentifier=@"MealTableViewCell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier forIndexPath:indexPath];
     if ([cell isKindOfClass:[MealTableViewCell class]]) {
         MealTableViewCell *mealCell = (MealTableViewCell *)cell;
         Meal *meal=[meals objectAtIndex:indexPath.row];
-        
         mealCell.nameLabel.text = meal.name;
         mealCell.photoImageView.image = meal.photo;
         mealCell.ratingControl.rating = meal.rating.integerValue;
         mealCell.ratingControl.userInteractionEnabled = NO;
+       // [mealCell star];
         return mealCell;
     }
     return cell;
@@ -106,8 +106,6 @@
         [self saveMeals];
       
     }
-    
-    
 }
 -(void) saveMeals{
     BOOL isSuccessfulSave=[NSKeyedArchiver archiveRootObject:meals toFile:[Meal archiveURL]];
