@@ -77,6 +77,7 @@
         
         mealCell.nameLabel.text = meal.name;
         mealCell.photoImageView.image = meal.photo;
+        mealCell.photoImageView.contentMode = UIViewContentModeScaleAspectFit;
         mealCell.ratingControl.rating = meal.rating.integerValue;
         mealCell.ratingControl.userInteractionEnabled = NO;
         return mealCell;

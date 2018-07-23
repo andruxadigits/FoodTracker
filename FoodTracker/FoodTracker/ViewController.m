@@ -49,6 +49,7 @@
 - (void) imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
     _selectedImage= info[UIImagePickerControllerOriginalImage];
     self.photoImageView.image = _selectedImage;
+    self.photoImageView.contentMode = UIViewContentModeScaleAspectFit;
     [self dismissViewControllerAnimated:true completion:nil];
 }
 //:MARK: Navigation
@@ -106,6 +107,7 @@
         self.navigationItem.title = self.meal.name;
         self.nameTextField.text = self.meal.name;
         self.photoImageView.image = self.meal.photo;
+        self.photoImageView.contentMode = UIViewContentModeScaleAspectFit;
         self.ratingControl.rating = self.meal.rating.integerValue;
     }
     
