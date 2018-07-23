@@ -20,17 +20,15 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
     self.navigationItem.leftBarButtonItem = self.editButtonItem;
-    NSMutableArray *savedMeals=[self loadMeals];
-    if (savedMeals)
-    {
-        if (!meals) meals=[[NSMutableArray alloc] initWithCapacity:savedMeals.count];
+    NSMutableArray *savedMeals = [self loadMeals];
+    if (savedMeals) {
+        if (!meals) meals = [[NSMutableArray alloc] initWithCapacity:savedMeals.count];
         [meals addObjectsFromArray:savedMeals];
     }
     else
     {
-         [self loadSampleMeals];
+        [self loadSampleMeals];
     }
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -45,14 +43,14 @@
 }
 //MARK: Private Methods
 
--(void) loadSampleMeals{
+- (void) loadSampleMeals {
     meals = [[NSMutableArray alloc] initWithCapacity:3];
     UIImage *photo1 = [UIImage imageNamed:@"meal1"];
     UIImage *photo2 = [UIImage imageNamed:@"meal2"];
     UIImage *photo3 = [UIImage imageNamed:@"meal3"];
-    Meal *meal1= [[Meal alloc] initWithName:@"donuts" photo:photo1 rating:@4];
-    Meal *meal2= [[Meal alloc] initWithName:@"pork steak" photo:photo2 rating:@5];
-    Meal *meal3= [[Meal alloc] initWithName:@"potatoes with cutlet" photo:photo3 rating:@3];
+    Meal *meal1 = [[Meal alloc] initWithName:@"donuts" photo:photo1 rating:@4];
+    Meal *meal2 = [[Meal alloc] initWithName:@"pork steak" photo:photo2 rating:@5];
+    Meal *meal3 = [[Meal alloc] initWithName:@"potatoes with cutlet" photo:photo3 rating:@3];
     [meals addObject:meal1];
     [meals addObject:meal2];
     [meals addObject:meal3];
@@ -69,7 +67,7 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSString *cellIdentifier=@"MealTableViewCell";
+    NSString *cellIdentifier = @"MealTableViewCell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier forIndexPath:indexPath];
     if ([cell isKindOfClass:[MealTableViewCell class]]) {
         MealTableViewCell *mealCell = (MealTableViewCell *)cell;
@@ -78,7 +76,6 @@
         mealCell.photoImageView.image = meal.photo;
         mealCell.ratingControl.rating = meal.rating.integerValue;
         mealCell.ratingControl.userInteractionEnabled = NO;
-       // [mealCell star];
         return mealCell;
     }
     return cell;
@@ -89,35 +86,32 @@
     if ([sourceViewController isKindOfClass:[ViewController class]])
     {
         NSIndexPath *selectedIndexPath=self.tableView.indexPathForSelectedRow;
-        if (selectedIndexPath)
-        {
+        if (selectedIndexPath) {
             //Update an existing meal.
             meals[selectedIndexPath.row] = sourceViewController.meal;
             [self.tableView reloadRowsAtIndexPaths:@[selectedIndexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
-        }else
-        {
+        }
+        else {
             //Add a new meal.
-            Meal *meal=sourceViewController.meal;
+            Meal *meal = sourceViewController.meal;
             NSIndexPath *newIndexPath;
-            newIndexPath=[NSIndexPath indexPathForRow:meals.count inSection:0];
+            newIndexPath = [NSIndexPath indexPathForRow:meals.count inSection:0];
             [meals addObject:meal];
-            [self.tableView insertRowsAtIndexPaths:@[newIndexPath] withRowAnimation:UITableViewRowAnimationAutomatic ];
+            [self.tableView insertRowsAtIndexPaths:@[newIndexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
         }
         [self saveMeals];
-      
     }
 }
--(void) saveMeals{
-    BOOL isSuccessfulSave=[NSKeyedArchiver archiveRootObject:meals toFile:[Meal archiveURL]];
-    if (isSuccessfulSave)
-    {
+- (void) saveMeals{
+    BOOL isSuccessfulSave = [NSKeyedArchiver archiveRootObject:meals toFile:[Meal archiveURL]];
+    if (isSuccessfulSave) {
         os_log_debug(OS_LOG_DEFAULT, "Meals successfully saved.");
-    }else{
+    }
+    else {
         os_log_error(OS_LOG_DEFAULT, "Failed to save meals...");
     }
 }
--(NSMutableArray *) loadMeals{
-    
+- (NSMutableArray *) loadMeals {
     NSMutableArray *Data=[NSKeyedUnarchiver unarchiveObjectWithFile:[Meal archiveURL]];
     return Data;
 }
@@ -130,10 +124,10 @@
     UIViewController *viewController = [segue destinationViewController];
     if ([viewController isKindOfClass:[ViewController class]]) {
         ViewController *mealDetailViiwController = (ViewController *)viewController;
-        MealTableViewCell *selectedMealCell =sender;
+        MealTableViewCell *selectedMealCell = sender;
         NSIndexPath *indexPath = [self.tableView indexPathForCell:selectedMealCell];
         Meal *selectedMeal = [meals objectAtIndex:indexPath.row];
-        mealDetailViiwController.meal=selectedMeal;
+        mealDetailViiwController.meal = selectedMeal;
     }
     
     // Get the new view controller using [segue destinationViewController].
@@ -141,12 +135,12 @@
 }
 
 /*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
+ // Override to support conditional editing of the table view.
+ - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+ // Return NO if you do not want the specified item to be editable.
+ return YES;
+ }
+ */
 
 
 // Override to support editing the table view.
@@ -156,25 +150,27 @@
         [meals removeObjectAtIndex:indexPath.row];
         [self saveMeals];
         [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    } else if (editingStyle == UITableViewCellEditingStyleInsert) {
+    }
+    else
+        if (editingStyle == UITableViewCellEditingStyleInsert) {
         // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
     }   
 }
 
 
 /*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
-}
-*/
+ // Override to support rearranging the table view.
+ - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
+ }
+ */
 
 /*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
+ // Override to support conditional rearranging of the table view.
+ - (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
+ // Return NO if you do not want the item to be re-orderable.
+ return YES;
+ }
+ */
 
 
 

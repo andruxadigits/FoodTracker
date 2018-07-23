@@ -7,45 +7,42 @@
 
 
 @implementation RatingControl{
-    NSMutableArray *ratingButtons;
-
+    NSMutableArray *_ratingButtons;
+    CGFloat _imageSize;
 }
 
 //MARK: Init
-- (instancetype) initWithFrame:(CGRect)frame{
+- (instancetype) initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
-        self.starSize=CGSizeMake(44.0, 44.0);
-        self.starCount=5;
-        self.spacing =8;
+        _imageSize = 90.0;
+        self.starSize = CGSizeMake(44.0, 44.0);
+        self.starCount = 5;
+        self.spacing = 8;
         [self updateButtonSelectionStates];
-        CGFloat width = [UIScreen mainScreen].bounds.size.width;
-        if (width >90+(self.starCount+1)*8+44.0*self.starCount){
-    //        [self setDistribution:UIStackViewDistributionFill];
-        }
-        else
-        {
-   //         [self setDistribution:UIStackViewDistributionFillEqually];
-            self.starSize=CGSizeMake((width-(90+(self.starCount+1)*8))/self.starCount, (width-(90+(self.starCount+1)*8))/self.starCount);
+        CGFloat screenWidth = [UIScreen mainScreen].bounds.size.width;
+        CGFloat totalWidth =_imageSize + (self.starCount + 1 ) * self.spacing + self.starSize.width * self.starCount;
+        if (screenWidth < totalWidth) {
+            CGFloat newStarSize =(screenWidth - (_imageSize + (self.starCount + 1) * self.spacing)) / self.starCount;
+            self.starSize = CGSizeMake(newStarSize,newStarSize);
         }
         [self setupButtons];
     }
     return self;
 }
--(instancetype)initWithCoder:(NSCoder *)coder{
+- (instancetype)initWithCoder:(NSCoder *)coder {
     self = [super initWithCoder:coder];
     if (self) {
-        self.starSize=CGSizeMake(44.0, 44.0);
-        self.starCount=5;
-        self.spacing =8;
-        CGFloat width = [UIScreen mainScreen].bounds.size.width;
-        if (width >90+(self.starCount+1)*8+44.0*self.starCount){
-         //   [self setDistribution:UIStackViewDistributionFillProportionally];
-        }
-        else
-        {
-    //        [self setDistribution:UIStackViewDistributionFillEqually];
-            self.starSize=CGSizeMake((width-(90+(self.starCount+1)*8))/self.starCount, (width-(90+(self.starCount+1)*8))/self.starCount);
+        _imageSize = 90.0;
+        self.starSize = CGSizeMake(44.0, 44.0);
+        self.starCount = 5;
+        self.spacing = 8;
+        [self updateButtonSelectionStates];
+        CGFloat screenWidth = [UIScreen mainScreen].bounds.size.width;
+        CGFloat totalWidth =_imageSize + (self.starCount + 1 ) * self.spacing + self.starSize.width * self.starCount;
+        if (screenWidth < totalWidth) {
+            CGFloat newStarSize =(screenWidth - (_imageSize + (self.starCount + 1) * self.spacing)) / self.starCount;
+            self.starSize = CGSizeMake(newStarSize,newStarSize);
         }
         [self setupButtons];
     }
@@ -54,18 +51,17 @@
 
 //MARK: Private Methods
 -(void)setupButtons{
-    for (int i=0;i<[ratingButtons count];i++)
-    {
-        [ratingButtons[i] removeArrangedSubview:ratingButtons[i]];
-        [ratingButtons[i] removeFromSuperview];
+    for (int i = 0;i < [_ratingButtons count];i++) {
+        [_ratingButtons[i] removeArrangedSubview:_ratingButtons[i]];
+        [_ratingButtons[i] removeFromSuperview];
     }
-    [ratingButtons removeAllObjects];
-    ratingButtons = [[NSMutableArray alloc] initWithCapacity:_starCount];
-    for (int i=0;i<_starCount;i++){
-        UIButton *button= [[UIButton alloc] init];
-        UIImage *filledStar=[UIImage imageNamed:@"filledStar"];
-        UIImage *emptyStar=[UIImage imageNamed:@"emptyStar"];
-        UIImage *highlightedStar=[UIImage imageNamed:@"highlightedStar"];
+    [_ratingButtons removeAllObjects];
+    _ratingButtons = [[NSMutableArray alloc] initWithCapacity:_starCount];
+    for (int i = 0;i < _starCount;i++) {
+        UIButton *button = [[UIButton alloc] init];
+        UIImage *filledStar = [UIImage imageNamed:@"filledStar"];
+        UIImage *emptyStar = [UIImage imageNamed:@"emptyStar"];
+        UIImage *highlightedStar = [UIImage imageNamed:@"highlightedStar"];
         [button setImage:emptyStar forState:UIControlStateNormal];
         [button setImage:filledStar forState:UIControlStateSelected];
         [button setImage:highlightedStar forState:UIControlStateHighlighted];
@@ -75,7 +71,7 @@
         button.accessibilityLabel=@"Set (i+1) star rating";
         [button addTarget:self action:@selector(ratingButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
         [self addArrangedSubview:button];
-        [ratingButtons addObject:button];
+        [_ratingButtons addObject:button];
     }
 }
 
@@ -84,42 +80,44 @@
     [self updateButtonSelectionStates];
 }
 
--(void) updateButtonSelectionStates{
-    for (int i=0;i<_starCount;i++){
-        [[ratingButtons objectAtIndex:i] setSelected:i<self.rating];
+-(void) updateButtonSelectionStates {
+    for (int i = 0;i < _starCount;i++) {
+        [[_ratingButtons objectAtIndex:i] setSelected:i < self.rating];
         
         NSString *hintString;
-        if (i==self.rating){
-            hintString=@"Tap to reset the rating to zero.";
-        }else{
-            hintString=nil;
+        if (i == self.rating) {
+            hintString = @"Tap to reset the rating to zero.";
+        }
+        else{
+            hintString = nil;
         }
         
         NSString *valueString;
         switch (self.rating) {
             case 0:
-                valueString=@"No ƒ set.";
+                valueString = @"No ƒ set.";
                 break;
             case 1:
-                valueString=@"1 star set.";
-            break;
+                valueString = @"1 star set.";
+                break;
             default:
-            valueString=@"\rating stars set.";
+                valueString = @"\rating stars set.";
                 break;
         }
-        [[ratingButtons objectAtIndex:i] setAccessibilityHint:hintString];
-        [[ratingButtons objectAtIndex:i] setAccessibilityValue:valueString];
+        [[_ratingButtons objectAtIndex:i] setAccessibilityHint:hintString];
+        [[_ratingButtons objectAtIndex:i] setAccessibilityValue:valueString];
         
-        }
+    }
 }
 //MARK: button Action
--(void) ratingButtonTapped:(UIButton *)button{
-    NSUInteger index = [ratingButtons indexOfObject:button];
-    NSUInteger selectedRating = index+1;
-    if (selectedRating==self.rating){
+-(void) ratingButtonTapped:(UIButton *)button {
+    NSUInteger index = [_ratingButtons indexOfObject:button];
+    NSUInteger selectedRating = index + 1;
+    if (selectedRating == self.rating) {
         self.rating = 0;
-    }else{
-        self.rating=selectedRating;
+    }
+    else {
+        self.rating = selectedRating;
     }
     [self updateButtonSelectionStates];
 }

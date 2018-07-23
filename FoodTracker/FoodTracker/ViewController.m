@@ -21,24 +21,23 @@
  */
 @end
 
-@implementation ViewController
-{
+@implementation ViewController {
     UIImagePickerController *_imagePicker;
     UIImage *_selectedImage;
 }
 //MARK: UITextFieldDelegate
-- (void) textFieldDidBeginEditing:(UITextField *)textField{
+- (void) textFieldDidBeginEditing:(UITextField *)textField {
     [self.saveButton setEnabled:false];
 }
-- (BOOL) textFieldShouldReturn:(UITextField *)textField{
+- (BOOL) textFieldShouldReturn:(UITextField *)textField {
     // Hide the keyboard.
     [textField resignFirstResponder];
     return true;
 }
-- (void) textFieldDidEndEditing:(UITextField *)textField{
-    self.mealNameLabel.text=textField.text;
+- (void) textFieldDidEndEditing:(UITextField *)textField {
+    self.mealNameLabel.text = textField.text;
     [self updateSaveButtonState];
-    [self navigationItem].title=textField.text;
+    [self navigationItem].title = textField.text;
 }
 
 //MARK: UIImagePickerControllerDelegate
@@ -47,7 +46,7 @@
     [self dismissViewControllerAnimated:true completion:nil];
 }
 - (void) imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info {
-    _selectedImage= info[UIImagePickerControllerOriginalImage];
+    _selectedImage = info[UIImagePickerControllerOriginalImage];
     self.photoImageView.image = _selectedImage;
     [self dismissViewControllerAnimated:true completion:nil];
 }
@@ -55,11 +54,11 @@
 - (IBAction)cancel:(UIBarButtonItem *)sender {
     UIViewController *isPresentingInAddMealMode = self.presentingViewController;
     UINavigationController *owningNavigationController = self.navigationController;
-    if (isPresentingInAddMealMode){
+    if (isPresentingInAddMealMode) {
         [self dismissViewControllerAnimated:true completion:nil];
     }
-    else if (owningNavigationController)
-    {
+    else
+        if (owningNavigationController) {
         [owningNavigationController popViewControllerAnimated:true];
     }
     
@@ -79,30 +78,30 @@
     _imagePicker.delegate = self;
     [self presentViewController:_imagePicker animated:YES completion:nil];
 }
-- (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
+- (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     [super prepareForSegue:segue sender:sender];
     UIBarButtonItem *button;
-    if ((button=sender)&&(button==self.saveButton)) {
+    if ((button = sender) && (button == self.saveButton)) {
         NSString *name = _nameTextField.text;
         UIImage *photo = _photoImageView.image;
         NSNumber *rating = [NSNumber numberWithInteger:_ratingControl.rating];
-        self.meal=[[Meal alloc] initWithName:name photo:photo rating:rating];
+        self.meal = [[Meal alloc] initWithName:name photo:photo rating:rating];
     }else
     {
-                return;
+        return;
     }
     
 }
 //MARK: Private Methods
--(void) updateSaveButtonState{
-    NSString *text=self.nameTextField.text;
-    [self.saveButton setEnabled:[text length]!=0];
+-(void) updateSaveButtonState {
+    NSString *text = self.nameTextField.text;
+    [self.saveButton setEnabled:[text length] != 0];
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Handle the text field’s user input through delegate callbacks.
     self.nameTextField.delegate = self;
-    if (self.meal!=nil){
+    if (self.meal != nil) {
         self.navigationItem.title = self.meal.name;
         self.nameTextField.text = self.meal.name;
         self.photoImageView.image = self.meal.photo;
