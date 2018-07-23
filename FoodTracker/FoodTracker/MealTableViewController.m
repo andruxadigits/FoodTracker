@@ -44,14 +44,14 @@
 }
 //MARK: Private Methods
 
--(void) loadSampleMeals{
+- (void) loadSampleMeals {
     meals = [[NSMutableArray alloc] initWithCapacity:3];
     UIImage *photo1 = [UIImage imageNamed:@"meal1"];
     UIImage *photo2 = [UIImage imageNamed:@"meal2"];
     UIImage *photo3 = [UIImage imageNamed:@"meal3"];
-    Meal *meal1= [[Meal alloc] initWithName:@"donuts" photo:photo1 rating:@4];
-    Meal *meal2= [[Meal alloc] initWithName:@"pork steak" photo:photo2 rating:@5];
-    Meal *meal3= [[Meal alloc] initWithName:@"potatoes with cutlet" photo:photo3 rating:@3];
+    Meal *meal1 = [[Meal alloc] initWithName:@"donuts" photo:photo1 rating:@4];
+    Meal *meal2 = [[Meal alloc] initWithName:@"pork steak" photo:photo2 rating:@5];
+    Meal *meal3 = [[Meal alloc] initWithName:@"potatoes with cutlet" photo:photo3 rating:@3];
     [meals addObject:meal1];
     [meals addObject:meal2];
     [meals addObject:meal3];
@@ -69,7 +69,7 @@
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSString *cellIdentifier=@"MealTableViewCell";
+    NSString *cellIdentifier = @"MealTableViewCell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier forIndexPath:indexPath];
     if ([cell isKindOfClass:[MealTableViewCell class]]) {
         MealTableViewCell *mealCell = (MealTableViewCell *)cell;
@@ -77,6 +77,7 @@
         
         mealCell.nameLabel.text = meal.name;
         mealCell.photoImageView.image = meal.photo;
+        mealCell.photoImageView.contentMode = UIViewContentModeScaleAspectFit;
         mealCell.ratingControl.rating = meal.rating.integerValue;
         mealCell.ratingControl.userInteractionEnabled = NO;
         return mealCell;
@@ -94,8 +95,8 @@
             //Update an existing meal.
             meals[selectedIndexPath.row] = sourceViewController.meal;
             [self.tableView reloadRowsAtIndexPaths:@[selectedIndexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
-        }else
-        {
+        }
+        else {
             //Add a new meal.
             Meal *meal=sourceViewController.meal;
             NSIndexPath *newIndexPath;
@@ -109,17 +110,16 @@
     
     
 }
--(void) saveMeals{
+-(void) saveMeals {
     BOOL isSuccessfulSave=[NSKeyedArchiver archiveRootObject:meals toFile:[Meal archiveURL]];
-    if (isSuccessfulSave)
-    {
+    if (isSuccessfulSave) {
         os_log_debug(OS_LOG_DEFAULT, "Meals successfully saved.");
-    }else{
+    }
+    else {
         os_log_error(OS_LOG_DEFAULT, "Failed to save meals...");
     }
 }
--(NSMutableArray *) loadMeals{
-    
+-(NSMutableArray *) loadMeals {
     NSMutableArray *Data=[NSKeyedUnarchiver unarchiveObjectWithFile:[Meal archiveURL]];
     return Data;
 }

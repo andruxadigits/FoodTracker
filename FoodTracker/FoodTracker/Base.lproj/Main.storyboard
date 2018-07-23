@@ -27,22 +27,35 @@
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="89.666666666666671"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X0i-Zh-bT0">
-                                            <rect key="frame" x="98" y="11" width="261" height="21"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X0i-Zh-bT0">
+                                            <rect key="frame" x="100" y="8.6666666666666643" width="255" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <stackView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="HDJ-Ee-UYd" customClass="RatingControl">
-                                            <rect key="frame" x="98" y="40" width="252" height="44"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        </stackView>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="defaultPhoto" translatesAutoresizingMaskIntoConstraints="NO" id="bdd-sO-Zir">
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="defaultPhoto" translatesAutoresizingMaskIntoConstraints="NO" id="bdd-sO-Zir">
                                             <rect key="frame" x="0.0" y="0.0" width="90" height="90"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="90" id="CIs-RZ-3EX"/>
+                                                <constraint firstAttribute="width" constant="90" id="MSq-ta-faL"/>
+                                            </constraints>
                                         </imageView>
+                                        <stackView opaque="NO" contentMode="scaleAspectFit" distribution="equalSpacing" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="HDJ-Ee-UYd" customClass="RatingControl">
+                                            <rect key="frame" x="100" y="37" width="267" height="44"/>
+                                        </stackView>
                                     </subviews>
+                                    <constraints>
+                                        <constraint firstItem="bdd-sO-Zir" firstAttribute="top" secondItem="qZ8-9O-L7M" secondAttribute="top" id="8Sq-av-vOj"/>
+                                        <constraint firstAttribute="bottom" secondItem="bdd-sO-Zir" secondAttribute="bottom" constant="-0.33000000000000002" id="9j7-8S-iqb"/>
+                                        <constraint firstAttribute="bottom" secondItem="HDJ-Ee-UYd" secondAttribute="bottom" constant="8" id="Fj4-su-KNe"/>
+                                        <constraint firstItem="HDJ-Ee-UYd" firstAttribute="leading" secondItem="bdd-sO-Zir" secondAttribute="trailing" constant="10" id="Fqn-jf-bbU"/>
+                                        <constraint firstAttribute="trailing" secondItem="X0i-Zh-bT0" secondAttribute="trailing" constant="20" id="Jwk-Bz-lf7"/>
+                                        <constraint firstAttribute="trailing" secondItem="HDJ-Ee-UYd" secondAttribute="trailing" constant="8" id="UrF-z5-Z2s"/>
+                                        <constraint firstItem="HDJ-Ee-UYd" firstAttribute="top" secondItem="X0i-Zh-bT0" secondAttribute="bottom" constant="8" id="VCd-fC-WhU"/>
+                                        <constraint firstItem="X0i-Zh-bT0" firstAttribute="top" secondItem="qZ8-9O-L7M" secondAttribute="top" constant="8" id="gFA-0a-jUP"/>
+                                        <constraint firstItem="X0i-Zh-bT0" firstAttribute="leading" secondItem="bdd-sO-Zir" secondAttribute="trailing" constant="10" id="jTz-vd-W2u"/>
+                                        <constraint firstItem="bdd-sO-Zir" firstAttribute="leading" secondItem="qZ8-9O-L7M" secondAttribute="leading" id="mP3-aU-Ebq"/>
+                                    </constraints>
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="nameLabel" destination="X0i-Zh-bT0" id="qAG-Fx-0aI"/>

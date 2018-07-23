@@ -24,9 +24,11 @@ static NSString *const kRatingKey = @"rating";
 -(instancetype)initWithName:(NSString *)name photo:(UIImage * )photo rating:(NSNumber *)rating{
     self = [super init];
     if (self) {
-        if (!([name length]==0)){}else
+        if (!([name length] == 0)) {
+        } else
             return nil;
-        if ((rating>=0)&&(rating.integerValue<=5)){}else
+        if ((rating >= 0) && (rating.integerValue <= 5)) {
+        }else
             return nil;
         self.name = name;
         self.photo = photo;
@@ -48,9 +50,9 @@ static NSString *const kRatingKey = @"rating";
     [aCoder encodeObject:self.rating forKey:kRatingKey];
 }
 + (NSArray *)Path{
-    return NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);;
+    return NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
 }
-+ (NSString *)documentDirectoryPath{
++ (NSString *)documentDirectoryPath {
     return [[Meal Path] objectAtIndex:0];
 }
 + (NSString *)archiveURL{
