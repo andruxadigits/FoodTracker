@@ -41,7 +41,9 @@
                                             </constraints>
                                         </imageView>
                                         <stackView opaque="NO" contentMode="scaleAspectFit" distribution="equalSpacing" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="HDJ-Ee-UYd" customClass="RatingControl">
+
                                             <rect key="frame" x="100" y="37" width="267" height="44"/>
+
                                         </stackView>
                                     </subviews>
                                     <constraints>
@@ -51,6 +53,7 @@
                                         <constraint firstItem="HDJ-Ee-UYd" firstAttribute="leading" secondItem="bdd-sO-Zir" secondAttribute="trailing" constant="10" id="Fqn-jf-bbU"/>
                                         <constraint firstAttribute="trailing" secondItem="X0i-Zh-bT0" secondAttribute="trailing" constant="20" id="Jwk-Bz-lf7"/>
                                         <constraint firstAttribute="trailing" secondItem="HDJ-Ee-UYd" secondAttribute="trailing" constant="8" id="UrF-z5-Z2s"/>
+
                                         <constraint firstItem="HDJ-Ee-UYd" firstAttribute="top" secondItem="X0i-Zh-bT0" secondAttribute="bottom" constant="8" id="VCd-fC-WhU"/>
                                         <constraint firstItem="X0i-Zh-bT0" firstAttribute="top" secondItem="qZ8-9O-L7M" secondAttribute="top" constant="8" id="gFA-0a-jUP"/>
                                         <constraint firstItem="X0i-Zh-bT0" firstAttribute="leading" secondItem="bdd-sO-Zir" secondAttribute="trailing" constant="10" id="jTz-vd-W2u"/>

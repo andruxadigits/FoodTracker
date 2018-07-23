@@ -29,6 +29,7 @@ static NSString *const kRatingKey = @"rating";
             return nil;
         if ((rating >= 0) && (rating.integerValue <= 5)) {
         }else
+
             return nil;
         self.name = name;
         self.photo = photo;
@@ -55,7 +56,7 @@ static NSString *const kRatingKey = @"rating";
 + (NSString *)documentDirectoryPath {
     return [[Meal Path] objectAtIndex:0];
 }
-+ (NSString *)archiveURL{
++ (NSString *)archiveURL {
     return [[Meal documentDirectoryPath] stringByAppendingPathComponent:@"meals"];
 }
 
