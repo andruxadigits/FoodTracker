@@ -66,8 +66,8 @@
         [button setImage:filledStar forState:UIControlStateSelected];
         [button setImage:highlightedStar forState:UIControlStateHighlighted];
         button.translatesAutoresizingMaskIntoConstraints =false;
-        [button.heightAnchor constraintEqualToConstant:_starSize.height].active = true;
-        [button.widthAnchor constraintEqualToConstant:_starSize.width].active = true;
+        [button.heightAnchor constraintEqualToConstant:self.starSize.height].active = true;
+        [button.widthAnchor constraintEqualToConstant:self.starSize.width].active = true;
         button.accessibilityLabel=@"Set (i+1) star rating";
         [button addTarget:self action:@selector(ratingButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
         [self addArrangedSubview:button];

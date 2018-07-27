@@ -9,8 +9,11 @@
 #import <UIKit/UIKit.h>
 #import "Meal.h"
 #import "MealTableViewCell.h"
-#import "ViewController.h"
+#import "MealViewController.h"
 @import os.log;
+@protocol MealTableViewControllerDelegate <NSObject>
+-(void) MealTableViewControllerDidSelectMeal:(Meal *)selectedMeal;
+@end
 @interface MealTableViewController : UITableViewController
-
+@property (weak,nonatomic) NSObject <MealTableViewControllerDelegate> *delegate;
 @end

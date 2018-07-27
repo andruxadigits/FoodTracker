@@ -36,7 +36,6 @@ static NSString *const kRatingKey = @"rating";
     }
     return self;
 }
-
 - (instancetype)initWithCoder:(NSCoder *)aDecoder {
     NSString *name = [aDecoder decodeObjectForKey:kNameKey];
     UIImage *photo = [aDecoder decodeObjectForKey:kPhotoKey];

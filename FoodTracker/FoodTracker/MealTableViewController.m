@@ -14,12 +14,14 @@
     NSMutableArray *meals;
     
 }
-@end
 
+@end
 @implementation MealTableViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.navigationItem.title = @"Your meals";
+    [self.tableView registerClass:[MealTableViewCell class] forCellReuseIdentifier:NSStringFromClass([MealTableViewCell class])];
     self.navigationItem.leftBarButtonItem = self.editButtonItem;
     NSMutableArray *savedMeals=[self loadMeals];
     if (savedMeals)
@@ -29,7 +31,7 @@
     }
     else
     {
-         [self loadSampleMeals];
+        [self loadSampleMeals];
     }
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -69,25 +71,21 @@
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSString *cellIdentifier = @"MealTableViewCell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier forIndexPath:indexPath];
-    if ([cell isKindOfClass:[MealTableViewCell class]]) {
-        MealTableViewCell *mealCell = (MealTableViewCell *)cell;
-        Meal *meal=[meals objectAtIndex:indexPath.row];
-        
-        mealCell.nameLabel.text = meal.name;
-        mealCell.photoImageView.image = meal.photo;
-        mealCell.photoImageView.contentMode = UIViewContentModeScaleAspectFit;
-        mealCell.ratingControl.rating = meal.rating.integerValue;
-        mealCell.ratingControl.userInteractionEnabled = NO;
-        return mealCell;
-    }
-    return cell;
+    MealTableViewCell *mealCell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([MealTableViewCell class]) forIndexPath:indexPath];
+    Meal *meal = [meals objectAtIndex:indexPath.row];
+    [mealCell awakeFromNib];
+    mealCell.nameLabel.text = meal.name;
+    mealCell.photoImageView.image = meal.photo;
+    mealCell.photoImageView.contentMode = UIViewContentModeScaleAspectFit;
+    mealCell.ratingControl.rating = meal.rating.integerValue;
+    mealCell.ratingControl.userInteractionEnabled = NO;
+    return mealCell;
 }
+
 //MARK: Actions
 -(IBAction) unwindToMelList:(UIStoryboardSegue *)sender{
-    ViewController *sourceViewController=sender.sourceViewController;
-    if ([sourceViewController isKindOfClass:[ViewController class]])
+    MealViewController *sourceViewController=sender.sourceViewController;
+    if ([sourceViewController isKindOfClass:[MealViewController class]])
     {
         NSIndexPath *selectedIndexPath=self.tableView.indexPathForSelectedRow;
         if (selectedIndexPath)
@@ -105,7 +103,7 @@
             [self.tableView insertRowsAtIndexPaths:@[newIndexPath] withRowAnimation:UITableViewRowAnimationAutomatic ];
         }
         [self saveMeals];
-      
+        
     }
     
     
@@ -123,15 +121,19 @@
     NSMutableArray *Data=[NSKeyedUnarchiver unarchiveObjectWithFile:[Meal archiveURL]];
     return Data;
 }
-
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    Meal *meal = [meals objectAtIndex:indexPath.row];
+    [self.delegate MealTableViewControllerDidSelectMeal:meal];
+    
+}
 //MARK:Navigation
 
 //In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     [super prepareForSegue:segue sender:sender];
     UIViewController *viewController = [segue destinationViewController];
-    if ([viewController isKindOfClass:[ViewController class]]) {
-        ViewController *mealDetailViiwController = (ViewController *)viewController;
+    if ([viewController isKindOfClass:[MealViewController class]]) {
+        MealViewController *mealDetailViiwController = (MealViewController *)viewController;
         MealTableViewCell *selectedMealCell =sender;
         NSIndexPath *indexPath = [self.tableView indexPathForCell:selectedMealCell];
         Meal *selectedMeal = [meals objectAtIndex:indexPath.row];
@@ -143,12 +145,12 @@
 }
 
 /*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
+ // Override to support conditional editing of the table view.
+ - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+ // Return NO if you do not want the specified item to be editable.
+ return YES;
+ }
+ */
 
 
 // Override to support editing the table view.
@@ -160,23 +162,23 @@
         [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
     } else if (editingStyle == UITableViewCellEditingStyleInsert) {
         // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
+    }
 }
 
 
 /*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
-}
-*/
+ // Override to support rearranging the table view.
+ - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
+ }
+ */
 
 /*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
+ // Override to support conditional rearranging of the table view.
+ - (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
+ // Return NO if you do not want the item to be re-orderable.
+ return YES;
+ }
+ */
 
 
 

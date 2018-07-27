@@ -1,5 +1,5 @@
 //
-//  ViewController.h
+//  MealViewController.h
 //  FoodTracker
 //
 //  Created by hello on 12/07/2018.
@@ -11,8 +11,8 @@
 #import "Meal.h"
 @import os.log;
 
-@interface ViewController : UIViewController <UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
-@property Meal *meal;
+@interface MealViewController : UIViewController <UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
+@property(nonatomic) Meal *meal;
 
 @end
 
