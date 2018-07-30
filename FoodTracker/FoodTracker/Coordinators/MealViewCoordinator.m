@@ -7,30 +7,33 @@
 //
 
 #import "MealViewCoordinator.h"
-@interface MealViewCoordinator()
+@interface MealViewCoordinator()<MealViewControllerDelegate>
 @property (strong, nonatomic) UINavigationController *presenter;
 @property (strong, nonatomic) MealViewController *mealViewController;
-@property (strong, nonatomic) MealTableViewController *mealTableViewController;
 @property (strong, nonatomic) Meal *meal;
-
+@property (strong, nonatomic) MealTableViewCoordinator *mealTableViewCoordinator;
 @end
 
 @implementation MealViewCoordinator
-
--(instancetype) initWithPresenter:(UINavigationController *)presenter Meal:(Meal *)meal{
+-(instancetype) initWithPresenter:(UINavigationController *)presenter MealTableViewCoordinator:(MealTableViewCoordinator *)mealTableViewCoordinator Meal:(Meal *)meal{
     self.presenter = presenter;
-    [NSLayoutConstraint activateConstraints:@[
-                                              [self.presenter.navigationBar.heightAnchor  constraintEqualToConstant:10.0f],
-                                              ]];
+    self.mealTableViewCoordinator = mealTableViewCoordinator;
     self.meal = meal;
     return self;
 }
 -(void) start {
     MealViewController *mealViewController = [[MealViewController alloc] initWithNibName:nil bundle:nil];
-    mealViewController.meal = self.meal;
+    [mealViewController setMeal:self.meal];
     self.mealViewController = mealViewController;
     [self.presenter pushViewController:mealViewController animated:true];
-    self.mealViewController = mealViewController;
+    self.mealViewController.delegate = self;
+    
 }
+-(void) MealViewControllerSaveButton: (Meal *)selectedMeal {
+    [self.mealTableViewCoordinator saveMeal:selectedMeal];
+    [self.presenter popViewControllerAnimated:YES];
+}
+
+
 
 @end

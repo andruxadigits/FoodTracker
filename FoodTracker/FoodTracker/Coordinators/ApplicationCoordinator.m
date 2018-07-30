@@ -18,11 +18,10 @@
 - (instancetype) init:(UIWindow *)window {
     self.window = window;
     self.rootViewController = [ [UINavigationController alloc] init ];
-    self.rootViewController.navigationBar.prefersLargeTitles = YES;
     UIViewController *emptyViewController = [[UIViewController alloc] init];
     emptyViewController.view.backgroundColor = [UIColor whiteColor];
     [self.rootViewController pushViewController:emptyViewController animated:false];
-    self.mealTableViewCoordinator = [[MealTableViewCoordinator alloc] initWithPresenter:self.rootViewController];
+    self.mealTableViewCoordinator = [[MealTableViewCoordinator alloc] initWithPresenter:self.rootViewController meal:nil mealIndexPath:nil];
     return self;
 }
 - (void) start {

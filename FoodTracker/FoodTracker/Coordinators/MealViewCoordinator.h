@@ -6,10 +6,10 @@
 //  Copyright © 2018 digits. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 #import "Coordinator.h"
 #import "MealViewController.h"
-#import "MealTableViewController.h"
+#import "MealTableViewCoordinator.h"
 @interface MealViewCoordinator : NSObject <Coordinator>
--(instancetype) initWithPresenter:(UINavigationController *)presenter Meal:(Meal *)meal;
+-(instancetype) initWithPresenter:(UINavigationController *)presenter MealTableViewCoordinator:(NSObject *)mealTableViewCoordinator Meal:(Meal *)meal;
 @end
