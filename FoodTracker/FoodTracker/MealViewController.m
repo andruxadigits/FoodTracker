@@ -27,8 +27,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Handle the text field’s user input through delegate callbacks.
-    //  self.nameTextField.delegate = self;
-    
+   
     if (self.meal != nil) {
         self.navigationItem.title = self.meal.name;
         self.stackView = [self setupStackView];
@@ -84,7 +83,6 @@
     }
     self.view.backgroundColor = [UIColor whiteColor];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSave target:self action:@selector(didSelectedSaveButton)];
-    //   self.nameTextField,did
     [self updateSaveButtonState];
 }
 - (UITextField *) setupTextField {
@@ -102,7 +100,6 @@
     stackView.translatesAutoresizingMaskIntoConstraints = NO;
     [stackView setAxis:UILayoutConstraintAxisVertical];
     stackView.alignment = UIStackViewAlignmentCenter;
-    //    stackView.alignment = UIStackViewAlignmentCenter;
     return stackView;
 }
 - (UIImageView *) setupPhotoImage{

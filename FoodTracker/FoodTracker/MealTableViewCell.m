@@ -65,7 +65,6 @@
     ratingControl.userInteractionEnabled = NO;
     ratingControl.translatesAutoresizingMaskIntoConstraints = NO;
     ratingControl.contentMode  = UIViewContentModeScaleAspectFit;
- //   ratingControl.distribution = UIStackViewDistributionEqualSpacing;
     return ratingControl;
 }
 

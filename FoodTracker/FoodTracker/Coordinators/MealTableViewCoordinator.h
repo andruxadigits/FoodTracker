@@ -11,7 +11,6 @@
 #import "MealTableViewController.h"
 #import "MealViewCoordinator.h"
 @interface MealTableViewCoordinator : NSObject <Coordinator>
-
 - (instancetype) initWithPresenter:(UINavigationController *)presenter meal:(Meal *)meal mealIndexPath:(NSIndexPath *)indexPath;
 -(void) saveMeal: (Meal *)selectedMeal;
 @end
