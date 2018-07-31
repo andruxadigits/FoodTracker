@@ -142,7 +142,6 @@
 }
 - (void) didSelectedSaveButton {
     Meal *meal = [[Meal alloc] initWithName:self.nameTextField.text photo:self.photoImageView.image rating:[NSNumber numberWithInteger:self.ratingControl.rating]];
-    [self dismissViewControllerAnimated:true completion:nil];
     [self.delegate MealViewControllerSaveButton:meal];
 }
 

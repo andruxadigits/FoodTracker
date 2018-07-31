@@ -8,13 +8,14 @@
 
 /* Begin PBXBuildFile section */
 		CE30B04020F7263C00D24A6D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CE30B03F20F7263C00D24A6D /* AppDelegate.m */; };
-		CE30B04320F7263C00D24A6D /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE30B04220F7263C00D24A6D /* ViewController.m */; };
-		CE30B04620F7263C00D24A6D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE30B04420F7263C00D24A6D /* Main.storyboard */; };
 		CE30B04820F7263D00D24A6D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE30B04720F7263D00D24A6D /* Assets.xcassets */; };
-		CE30B04B20F7263D00D24A6D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE30B04920F7263D00D24A6D /* LaunchScreen.storyboard */; };
 		CE30B04E20F7263D00D24A6D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CE30B04D20F7263D00D24A6D /* main.m */; };
 		CE30B05820F7263D00D24A6D /* FoodTrackerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CE30B05720F7263D00D24A6D /* FoodTrackerTests.m */; };
 		CE47571520F8A52400019D12 /* RatingControl.m in Sources */ = {isa = PBXBuildFile; fileRef = CE47571420F8A52400019D12 /* RatingControl.m */; };
+		CE4ABB7C210972B8009D2411 /* MealViewCoordinator.m in Sources */ = {isa = PBXBuildFile; fileRef = CE4ABB7B210972B8009D2411 /* MealViewCoordinator.m */; };
+		CE4ABB82210974CF009D2411 /* MealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CE4ABB81210974CE009D2411 /* MealViewController.m */; };
+		CE7FEC6021085AE200F21687 /* ApplicationCoordinator.m in Sources */ = {isa = PBXBuildFile; fileRef = CE7FEC5F21085AE200F21687 /* ApplicationCoordinator.m */; };
+		CE7FEC6321085E7000F21687 /* MealTableViewCoordinator.m in Sources */ = {isa = PBXBuildFile; fileRef = CE7FEC6221085E7000F21687 /* MealTableViewCoordinator.m */; };
 		CEE7E1B420FD7C5F000C18DB /* MealTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CEE7E1B320FD7C5F000C18DB /* MealTableViewCell.m */; };
 		CEE7E1B720FD82AF000C18DB /* MealTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEE7E1B620FD82AF000C18DB /* MealTableViewController.m */; };
 		CEE7E1BE20FD8B41000C18DB /* Meal.m in Sources */ = {isa = PBXBuildFile; fileRef = CEE7E1BD20FD8B41000C18DB /* Meal.m */; };
@@ -34,11 +35,7 @@
 		CE30B03B20F7263C00D24A6D /* FoodTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FoodTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE30B03E20F7263C00D24A6D /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		CE30B03F20F7263C00D24A6D /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		CE30B04120F7263C00D24A6D /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		CE30B04220F7263C00D24A6D /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
-		CE30B04520F7263C00D24A6D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		CE30B04720F7263D00D24A6D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		CE30B04A20F7263D00D24A6D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CE30B04C20F7263D00D24A6D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CE30B04D20F7263D00D24A6D /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		CE30B05320F7263D00D24A6D /* FoodTrackerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FoodTrackerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -46,6 +43,15 @@
 		CE30B05920F7263D00D24A6D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CE47571320F8A52300019D12 /* RatingControl.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RatingControl.h; sourceTree = "<group>"; };
 		CE47571420F8A52400019D12 /* RatingControl.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RatingControl.m; sourceTree = "<group>"; };
+		CE4ABB7A210972B8009D2411 /* MealViewCoordinator.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MealViewCoordinator.h; sourceTree = "<group>"; };
+		CE4ABB7B210972B8009D2411 /* MealViewCoordinator.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MealViewCoordinator.m; sourceTree = "<group>"; };
+		CE4ABB81210974CE009D2411 /* MealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MealViewController.m; sourceTree = "<group>"; };
+		CE4ABB8421097599009D2411 /* MealViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MealViewController.h; sourceTree = "<group>"; };
+		CE7FEC422108467400F21687 /* Coordinator.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Coordinator.h; sourceTree = "<group>"; };
+		CE7FEC5E21085AE200F21687 /* ApplicationCoordinator.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ApplicationCoordinator.h; sourceTree = "<group>"; };
+		CE7FEC5F21085AE200F21687 /* ApplicationCoordinator.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ApplicationCoordinator.m; sourceTree = "<group>"; };
+		CE7FEC6221085E7000F21687 /* MealTableViewCoordinator.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MealTableViewCoordinator.m; sourceTree = "<group>"; };
+		CE7FEC6421085EC200F21687 /* MealTableViewCoordinator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MealTableViewCoordinator.h; sourceTree = "<group>"; };
 		CEE7E1B220FD7C5F000C18DB /* MealTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MealTableViewCell.h; sourceTree = "<group>"; };
 		CEE7E1B320FD7C5F000C18DB /* MealTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MealTableViewCell.m; sourceTree = "<group>"; };
 		CEE7E1B520FD82AF000C18DB /* MealTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MealTableViewController.h; sourceTree = "<group>"; };
@@ -93,21 +99,19 @@
 		CE30B03D20F7263C00D24A6D /* FoodTracker */ = {
 			isa = PBXGroup;
 			children = (
-				CE30B03E20F7263C00D24A6D /* AppDelegate.h */,
-				CE30B03F20F7263C00D24A6D /* AppDelegate.m */,
-				CE30B04120F7263C00D24A6D /* ViewController.h */,
-				CE30B04220F7263C00D24A6D /* ViewController.m */,
+				CE7FEC59210859E500F21687 /* Coordinators */,
+				CE7FEC542108554100F21687 /* Application */,
 				CEE7E1BC20FD8B41000C18DB /* Meal.h */,
 				CEE7E1BD20FD8B41000C18DB /* Meal.m */,
+				CE4ABB8421097599009D2411 /* MealViewController.h */,
+				CE4ABB81210974CE009D2411 /* MealViewController.m */,
 				CEE7E1B220FD7C5F000C18DB /* MealTableViewCell.h */,
 				CEE7E1B320FD7C5F000C18DB /* MealTableViewCell.m */,
 				CEE7E1B520FD82AF000C18DB /* MealTableViewController.h */,
 				CEE7E1B620FD82AF000C18DB /* MealTableViewController.m */,
 				CE47571320F8A52300019D12 /* RatingControl.h */,
 				CE47571420F8A52400019D12 /* RatingControl.m */,
-				CE30B04420F7263C00D24A6D /* Main.storyboard */,
 				CE30B04720F7263D00D24A6D /* Assets.xcassets */,
-				CE30B04920F7263D00D24A6D /* LaunchScreen.storyboard */,
 				CE30B04C20F7263D00D24A6D /* Info.plist */,
 				CE30B04D20F7263D00D24A6D /* main.m */,
 			);
@@ -121,6 +125,29 @@
 				CE30B05920F7263D00D24A6D /* Info.plist */,
 			);
 			path = FoodTrackerTests;
+			sourceTree = "<group>";
+		};
+		CE7FEC542108554100F21687 /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				CE30B03E20F7263C00D24A6D /* AppDelegate.h */,
+				CE30B03F20F7263C00D24A6D /* AppDelegate.m */,
+			);
+			path = Application;
+			sourceTree = "<group>";
+		};
+		CE7FEC59210859E500F21687 /* Coordinators */ = {
+			isa = PBXGroup;
+			children = (
+				CE7FEC422108467400F21687 /* Coordinator.h */,
+				CE7FEC5E21085AE200F21687 /* ApplicationCoordinator.h */,
+				CE7FEC5F21085AE200F21687 /* ApplicationCoordinator.m */,
+				CE7FEC6421085EC200F21687 /* MealTableViewCoordinator.h */,
+				CE7FEC6221085E7000F21687 /* MealTableViewCoordinator.m */,
+				CE4ABB7A210972B8009D2411 /* MealViewCoordinator.h */,
+				CE4ABB7B210972B8009D2411 /* MealViewCoordinator.m */,
+			);
+			path = Coordinators;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -203,9 +230,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CE30B04B20F7263D00D24A6D /* LaunchScreen.storyboard in Resources */,
 				CE30B04820F7263D00D24A6D /* Assets.xcassets in Resources */,
-				CE30B04620F7263C00D24A6D /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -224,10 +249,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				CEE7E1B720FD82AF000C18DB /* MealTableViewController.m in Sources */,
+				CE4ABB82210974CF009D2411 /* MealViewController.m in Sources */,
 				CEE7E1B420FD7C5F000C18DB /* MealTableViewCell.m in Sources */,
+				CE4ABB7C210972B8009D2411 /* MealViewCoordinator.m in Sources */,
+				CE7FEC6321085E7000F21687 /* MealTableViewCoordinator.m in Sources */,
 				CE47571520F8A52400019D12 /* RatingControl.m in Sources */,
-				CE30B04320F7263C00D24A6D /* ViewController.m in Sources */,
 				CEE7E1BE20FD8B41000C18DB /* Meal.m in Sources */,
+				CE7FEC6021085AE200F21687 /* ApplicationCoordinator.m in Sources */,
 				CE30B04E20F7263D00D24A6D /* main.m in Sources */,
 				CE30B04020F7263C00D24A6D /* AppDelegate.m in Sources */,
 			);
@@ -250,25 +278,6 @@
 			targetProxy = CE30B05420F7263D00D24A6D /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
-
-/* Begin PBXVariantGroup section */
-		CE30B04420F7263C00D24A6D /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				CE30B04520F7263C00D24A6D /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		CE30B04920F7263D00D24A6D /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				CE30B04A20F7263D00D24A6D /* Base */,
-			);
-			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		CE30B05A20F7263D00D24A6D /* Debug */ = {

@@ -11,13 +11,10 @@
 @property (strong, nonatomic) UINavigationController *presenter;
 @property (strong, nonatomic) MealViewController *mealViewController;
 @property (strong, nonatomic) Meal *meal;
-@property (strong, nonatomic) MealTableViewCoordinator *mealTableViewCoordinator;
 @end
-
 @implementation MealViewCoordinator
--(instancetype) initWithPresenter:(UINavigationController *)presenter MealTableViewCoordinator:(MealTableViewCoordinator *)mealTableViewCoordinator Meal:(Meal *)meal{
+-(instancetype) initWithPresenter:(UINavigationController *)presenter Meal:(Meal *)meal{
     self.presenter = presenter;
-    self.mealTableViewCoordinator = mealTableViewCoordinator;
     self.meal = meal;
     return self;
 }
@@ -30,10 +27,9 @@
     
 }
 -(void) MealViewControllerSaveButton: (Meal *)selectedMeal {
-    [self.mealTableViewCoordinator saveMeal:selectedMeal];
+    [self.delegate saveMeal:selectedMeal];
+    [self.mealViewController  dismissViewControllerAnimated:true completion:nil];
     [self.presenter popViewControllerAnimated:YES];
 }
-
-
 
 @end

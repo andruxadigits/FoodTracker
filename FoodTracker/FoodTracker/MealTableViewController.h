@@ -12,9 +12,10 @@
 #import "MealViewController.h"
 @import os.log;
 @protocol MealTableViewControllerDelegate <NSObject>
--(void) MealTableViewControllerDidSelectMeal:(Meal *)selectedMeal indexPath:(NSIndexPath *)indexPath;
+-(void) MealTableViewControllerDidSelectMeal:(Meal *)selectedMeal;
+-(void) saveMeal: (Meal *)selectedMeal;
 @end
 @interface MealTableViewController : UITableViewController 
-@property (weak,nonatomic) NSObject <MealTableViewControllerDelegate> *delegate;
+@property (strong,nonatomic) NSObject <MealTableViewControllerDelegate> *delegate;
 - (void) editingMeal:(Meal *)meal ;
 @end

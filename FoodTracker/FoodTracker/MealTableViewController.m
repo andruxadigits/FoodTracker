@@ -117,13 +117,13 @@
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     Meal *meal = [meals objectAtIndex:indexPath.row];
-    [self.delegate MealTableViewControllerDidSelectMeal:meal indexPath:indexPath];
+    [self.delegate MealTableViewControllerDidSelectMeal:meal];
     
 }
 
 - (void) didSelectAddButton{
     Meal *meal = [[Meal alloc] initWithName:@"" photo:nil rating:nil];
-    [self.delegate MealTableViewControllerDidSelectMeal:meal indexPath:[NSIndexPath indexPathWithIndex:[self.tableView numberOfSections]+1] ];
+    [self.delegate MealTableViewControllerDidSelectMeal:meal];
 }
 //MARK:Navigation
 

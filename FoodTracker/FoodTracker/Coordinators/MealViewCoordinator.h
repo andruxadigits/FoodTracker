@@ -10,6 +10,8 @@
 #import "Coordinator.h"
 #import "MealViewController.h"
 #import "MealTableViewCoordinator.h"
+#import "MealTableViewController.h"
 @interface MealViewCoordinator : NSObject <Coordinator>
--(instancetype) initWithPresenter:(UINavigationController *)presenter MealTableViewCoordinator:(NSObject *)mealTableViewCoordinator Meal:(Meal *)meal;
+-(instancetype) initWithPresenter:(UINavigationController *)presenter Meal:(Meal *)meal;
+@property (strong,nonatomic) NSObject <MealTableViewControllerDelegate> *delegate;
 @end

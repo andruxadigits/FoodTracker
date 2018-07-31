@@ -21,7 +21,7 @@
     UIViewController *emptyViewController = [[UIViewController alloc] init];
     emptyViewController.view.backgroundColor = [UIColor whiteColor];
     [self.rootViewController pushViewController:emptyViewController animated:false];
-    self.mealTableViewCoordinator = [[MealTableViewCoordinator alloc] initWithPresenter:self.rootViewController meal:nil mealIndexPath:nil];
+    self.mealTableViewCoordinator = [[MealTableViewCoordinator alloc] initWithPresenter:self.rootViewController meal:nil];
     return self;
 }
 - (void) start {
