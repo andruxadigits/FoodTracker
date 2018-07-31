@@ -1,8 +1,8 @@
 #import "RatingControl.h"
 
 @interface RatingControl()
-@property (nonatomic, assign) IBInspectable CGSize starSize;
-@property (nonatomic, assign) IBInspectable int starCount;
+@property (nonatomic, assign) CGSize starSize;
+@property (nonatomic, assign) int starCount;
 @end
 
 
@@ -62,7 +62,7 @@
     
 }
 
--(void)setRating:(NSUInteger)rating {
+-(void) setRating:(NSUInteger)rating {
     _rating = rating;
     [self updateButtonSelectionStates];
 }

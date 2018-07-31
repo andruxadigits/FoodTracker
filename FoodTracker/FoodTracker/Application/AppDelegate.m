@@ -7,7 +7,7 @@
 //
 
 #import "AppDelegate.h"
-
+#import "ApplicationCoordinator.h"
 @interface AppDelegate ()
 
 @end
@@ -16,10 +16,8 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     self.window = [[UIWindow alloc] initWithFrame:UIScreen.mainScreen.bounds];
-    self.applicationCoordinator = [[ApplicationCoordinator alloc] init:self.window];
+    self.applicationCoordinator = [[ApplicationCoordinator alloc] initWithWindow:self.window];
     [self.applicationCoordinator start];
-    
-    // Override point for customization after application launch.
     return YES;
 }
 

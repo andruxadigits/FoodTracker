@@ -7,15 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "Meal.h"
-#import "MealTableViewCell.h"
-#import "MealViewController.h"
+@class Meal;
 @import os.log;
 @protocol MealTableViewControllerDelegate <NSObject>
--(void) MealTableViewControllerDidSelectMeal:(Meal *)selectedMeal;
+-(void) didSelectMealFromTalbeView:(Meal *)selectedMeal;
 -(void) saveMeal: (Meal *)selectedMeal;
 @end
 @interface MealTableViewController : UITableViewController 
-@property (strong,nonatomic) NSObject <MealTableViewControllerDelegate> *delegate;
-- (void) editingMeal:(Meal *)meal ;
+@property (nonatomic) NSObject <MealTableViewControllerDelegate> *delegate;
+- (void) saveChangesInTableView:(Meal *)changedMeal;
 @end

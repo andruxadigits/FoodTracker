@@ -8,9 +8,6 @@
 
 #import <UIKit/UIKit.h>
 #import "Coordinator.h"
-#import "MealTableViewController.h"
-#import "MealViewCoordinator.h"
 @interface MealTableViewCoordinator : NSObject <Coordinator>
-- (instancetype) initWithPresenter:(UINavigationController *)presenter meal:(Meal *)meal;
-
+- (instancetype) initWithPresenter:(UINavigationController *)presenter;
 @end

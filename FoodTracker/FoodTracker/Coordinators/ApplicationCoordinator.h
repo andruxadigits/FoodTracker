@@ -8,7 +8,6 @@
 
 #import <UIKit/UIKit.h>
 #import "Coordinator.h"
-#import "MealTableViewCoordinator.h"
 @interface ApplicationCoordinator: NSObject <Coordinator>
-- (instancetype) init:(UIWindow *)window;
+- (instancetype) initWithWindow:(UIWindow *)window;
 @end

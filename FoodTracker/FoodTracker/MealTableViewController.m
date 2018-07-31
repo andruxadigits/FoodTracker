@@ -7,14 +7,13 @@
 //
 
 #import "MealTableViewController.h"
-
+#import "Meal.h"
+#import "MealTableViewCell.h"
+#import "MealViewController.h"
 @interface MealTableViewController ()
 {
-    //MARK: Properties
     NSMutableArray *meals;
-    
 }
-
 @end
 @implementation MealTableViewController
 
@@ -34,16 +33,10 @@
         [self loadSampleMeals];
     }
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(didSelectAddButton)];
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
-    
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 //MARK: Private Methods
 
@@ -60,8 +53,6 @@
     [meals addObject:meal3];
 }
 
-#pragma mark - Table view data source
-
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 1;
 }
@@ -70,31 +61,30 @@
     return meals.count;
 }
 
-
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     MealTableViewCell *mealCell = [tableView dequeueReusableCellWithIdentifier:NSStringFromClass([MealTableViewCell class]) forIndexPath:indexPath];
-    Meal *meal = [meals objectAtIndex:indexPath.row];
+    Meal *meal = meals[indexPath.row];
     mealCell.photoImageView.image = meal.photo;
     mealCell.nameLabel.text = meal.name;
     mealCell.ratingControl.rating = meal.rating.integerValue;
     return mealCell;
 }
-
 //MARK: Actions
 
-- (void) editingMeal:(Meal *)meal{
+- (void) saveChangesInTableView:(Meal *)changedMeal{
     NSIndexPath *selectedIndexPath=self.tableView.indexPathForSelectedRow;
     if (selectedIndexPath)
     {
         //Update an existing meal.
-        meals[selectedIndexPath.row] = meal;
+        meals[selectedIndexPath.row] = changedMeal;
         [self.tableView reloadRowsAtIndexPaths:@[selectedIndexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+        
     }
     else {
         //Add a new meal.
         NSIndexPath *newIndexPath;
         newIndexPath=[NSIndexPath indexPathForRow:meals.count inSection:0];
-        [meals addObject:meal];
+        [meals addObject:changedMeal];
         [self.tableView insertRowsAtIndexPaths:@[newIndexPath] withRowAnimation:UITableViewRowAnimationAutomatic ];
     }
     [self saveMeals];
@@ -116,18 +106,16 @@
     return Data;
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    Meal *meal = [meals objectAtIndex:indexPath.row];
-    [self.delegate MealTableViewControllerDidSelectMeal:meal];
-    
+    Meal *meal = meals[indexPath.row];
+    [self.delegate didSelectMealFromTalbeView:meal];
 }
 
 - (void) didSelectAddButton{
     Meal *meal = [[Meal alloc] initWithName:@"" photo:nil rating:nil];
-    [self.delegate MealTableViewControllerDidSelectMeal:meal];
+    [self.delegate didSelectMealFromTalbeView:meal];
 }
 //MARK:Navigation
 
-//In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     [super prepareForSegue:segue sender:sender];
     UIViewController *viewController = [segue destinationViewController];
@@ -135,7 +123,7 @@
         MealViewController *mealDetailViewController = (MealViewController *)viewController;
         MealTableViewCell *selectedMealCell =sender;
         NSIndexPath *indexPath = [self.tableView indexPathForCell:selectedMealCell];
-        Meal *selectedMeal = [meals objectAtIndex:indexPath.row];
+        Meal *selectedMeal = meals[indexPath.row];
         mealDetailViewController.meal=selectedMeal;
     }
 }
@@ -176,7 +164,4 @@
  return YES;
  }
  */
-
-
-
 @end

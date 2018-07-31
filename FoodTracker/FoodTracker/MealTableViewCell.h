@@ -11,7 +11,7 @@
 
 @interface MealTableViewCell : UITableViewCell
 
-@property (strong, nonatomic) UIImageView *photoImageView;
+@property (nonatomic) UIImageView *photoImageView;
 @property (nonatomic) UILabel *nameLabel;
 @property (nonatomic) RatingControl *ratingControl;
 @end

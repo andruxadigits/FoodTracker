@@ -7,31 +7,32 @@
 //
 
 #import "MealTableViewCoordinator.h"
+#import "Coordinator.h"
+#import "MealTableViewController.h"
+#import "MealViewCoordinator.h"
 @interface MealTableViewCoordinator()<MealTableViewControllerDelegate>
-@property (strong, nonatomic) UINavigationController *presenter;
-@property (strong, nonatomic) MealTableViewController *mealTableViewController;
-@property (strong, nonatomic) MealViewCoordinator *mealViewCoordinator;
-@property (strong, nonatomic) Meal *meal;
+@property (nonatomic) UINavigationController *presenter;
+@property (nonatomic) MealTableViewController *mealTableViewController;
 @end
 @implementation MealTableViewCoordinator
-- (instancetype) initWithPresenter:(UINavigationController *)presenter meal:(Meal *)meal {
-    self.presenter = presenter;
-    self.meal = meal;
+- (instancetype) initWithPresenter:(UINavigationController *)presenter {
+    self = [super init];
+    if (self)
+        self.presenter = presenter;
     return self;
 }
 - (void) start {
     self.mealTableViewController = [[MealTableViewController alloc] initWithNibName:nil bundle:nil];
-    [self.presenter pushViewController:self.mealTableViewController animated:true];
     self.mealTableViewController.delegate = self;
+    [self.presenter pushViewController:self.mealTableViewController animated:true];
 }
--(void) MealTableViewControllerDidSelectMeal:(Meal *)selectedMeal {
+-(void) didSelectMealFromTalbeView:(Meal *)selectedMeal {
     MealViewCoordinator *mealViewCoordinator = [[MealViewCoordinator alloc] initWithPresenter:self.presenter Meal:selectedMeal];
-    [mealViewCoordinator start];
     mealViewCoordinator.delegate = self;
-    self.mealViewCoordinator = mealViewCoordinator;    
+    [mealViewCoordinator start];
 }
 -(void) saveMeal: (Meal *)selectedMeal {
-    [self.mealTableViewController editingMeal:selectedMeal];
+    [self.mealTableViewController saveChangesInTableView:selectedMeal];
 }
 @end
 

@@ -7,21 +7,24 @@
 //
 
 #import "ApplicationCoordinator.h"
+#import "MealTableViewCoordinator.h"
 @interface ApplicationCoordinator()
-
-@property (strong, nonatomic) UIWindow *window;
-@property (strong, nonatomic) UINavigationController *rootViewController;
-@property (nonatomic)  MealTableViewCoordinator *mealTableViewCoordinator;
+@property (nonatomic) UIWindow *window;
+@property (nonatomic) UINavigationController *rootViewController;
+@property (nonatomic) MealTableViewCoordinator *mealTableViewCoordinator;
 @end
 
 @implementation ApplicationCoordinator
-- (instancetype) init:(UIWindow *)window {
-    self.window = window;
-    self.rootViewController = [ [UINavigationController alloc] init ];
-    UIViewController *emptyViewController = [[UIViewController alloc] init];
-    emptyViewController.view.backgroundColor = [UIColor whiteColor];
-    [self.rootViewController pushViewController:emptyViewController animated:false];
-    self.mealTableViewCoordinator = [[MealTableViewCoordinator alloc] initWithPresenter:self.rootViewController meal:nil];
+- (instancetype) initWithWindow:(UIWindow *)window {
+    self = [super init];
+    if (self) {
+        self.window = window;
+        self.rootViewController = [ [UINavigationController alloc] init ];
+        UIViewController *emptyViewController = [[UIViewController alloc] init];
+        emptyViewController.view.backgroundColor = [UIColor whiteColor];
+        [self.rootViewController pushViewController:emptyViewController animated:false];
+        self.mealTableViewCoordinator = [[MealTableViewCoordinator alloc] initWithPresenter:self.rootViewController];
+    }
     return self;
 }
 - (void) start {

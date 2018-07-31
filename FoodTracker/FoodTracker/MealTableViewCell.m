@@ -21,7 +21,6 @@
         CGFloat cellHeight = MAX([UIScreen mainScreen].bounds.size.width,[UIScreen mainScreen].bounds.size.height)/6;
         CGFloat cellSpacing = cellHeight / 10;
         [self.nameLabel setFont:[UIFont systemFontOfSize:cellHeight/5]];
-        
         [NSLayoutConstraint activateConstraints:@[
                                                   [self.contentView.heightAnchor  constraintEqualToConstant:cellHeight],
                                                  
@@ -39,7 +38,6 @@
                                                   [self.ratingControl.leftAnchor constraintEqualToAnchor:self.photoImageView.rightAnchor constant:cellSpacing],
                                                   [self.ratingControl.topAnchor constraintEqualToAnchor:self.nameLabel.bottomAnchor constant:cellSpacing],
                                                   [self.ratingControl.rightAnchor constraintEqualToAnchor:self.contentView.rightAnchor constant:-cellSpacing],
-                                                  
                                                   ]];
     }
     return self;

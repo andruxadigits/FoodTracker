@@ -7,26 +7,31 @@
 //
 
 #import "MealViewCoordinator.h"
+#import "MealViewController.h"
+#import "MealTableViewCoordinator.h"
+#import "MealTableViewController.h"
 @interface MealViewCoordinator()<MealViewControllerDelegate>
-@property (strong, nonatomic) UINavigationController *presenter;
-@property (strong, nonatomic) MealViewController *mealViewController;
-@property (strong, nonatomic) Meal *meal;
+@property (nonatomic) UINavigationController *presenter;
+@property (nonatomic) MealViewController *mealViewController;
+@property (nonatomic) Meal *meal;
 @end
 @implementation MealViewCoordinator
 -(instancetype) initWithPresenter:(UINavigationController *)presenter Meal:(Meal *)meal{
-    self.presenter = presenter;
-    self.meal = meal;
+    self = [super init];
+    if (self) {
+        self.presenter = presenter;
+        self.meal = meal;
+    }
     return self;
 }
 -(void) start {
     MealViewController *mealViewController = [[MealViewController alloc] initWithNibName:nil bundle:nil];
     [mealViewController setMeal:self.meal];
     self.mealViewController = mealViewController;
-    [self.presenter pushViewController:mealViewController animated:true];
     self.mealViewController.delegate = self;
-    
+    [self.presenter pushViewController:mealViewController animated:true];
 }
--(void) MealViewControllerSaveButton: (Meal *)selectedMeal {
+-(void) selectedSaveButton: (Meal *)selectedMeal {
     [self.delegate saveMeal:selectedMeal];
     [self.mealViewController  dismissViewControllerAnimated:true completion:nil];
     [self.presenter popViewControllerAnimated:YES];

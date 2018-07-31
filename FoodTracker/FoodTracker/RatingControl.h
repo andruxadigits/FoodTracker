@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-IB_DESIGNABLE
 @interface RatingControl : UIStackView
 @property (nonatomic) NSUInteger rating;
 @end
