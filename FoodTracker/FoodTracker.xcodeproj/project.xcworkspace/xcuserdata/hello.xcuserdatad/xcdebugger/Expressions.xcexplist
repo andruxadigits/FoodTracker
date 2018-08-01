@@ -3,16 +3,52 @@
    version = "1.0">
    <ContextStates>
       <ContextState
+         contextName = "-[RatingControl setupButtons]:RatingControl.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "[_ratingButtons objectAtIndex:i]">
+            </PersistentString>
+            <PersistentString
+               value = "[_ratingButtons count]">
+            </PersistentString>
+            <PersistentString
+               value = "[_ratingButtons objectAtIndex:i+1]">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[MealTableViewController viewDidLoad]:MealTableViewController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.tableView">
+            </PersistentString>
+            <PersistentString
+               value = "savedMeals.count">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "-[ViewController prepareForSegue:sender:]:ViewController.m">
          <PersistentStrings>
             <PersistentString
-               value = "self.photoImageView.image">
+               value = "self.ratingControl.rating">
             </PersistentString>
             <PersistentString
                value = "_nameTextField.text">
             </PersistentString>
             <PersistentString
-               value = "self.ratingControl.rating">
+               value = "self.photoImageView.image">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "-[MealViewController viewDidLoad]:MealViewController.m">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.navigationController.navigationBar.frame.size.height">
+            </PersistentString>
+            <PersistentString
+               value = "self.photoImageView.bottomAnchor">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

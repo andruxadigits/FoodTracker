@@ -1,8 +1,8 @@
 #import "RatingControl.h"
 
 @interface RatingControl()
-@property (nonatomic, assign) IBInspectable CGSize starSize;
-@property (nonatomic, assign) IBInspectable int starCount;
+@property (nonatomic, assign) CGSize starSize;
+@property (nonatomic, assign) int starCount;
 @end
 
 
@@ -15,17 +15,9 @@
 - (instancetype) initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
-        _imageSize = 90.0;
-        self.starSize = CGSizeMake(44.0, 44.0);
         self.starCount = 5;
-        self.spacing = 8;
+        self.spacing = 0;
         [self updateButtonSelectionStates];
-        CGFloat screenWidth = MIN([UIScreen mainScreen].bounds.size.width,[UIScreen mainScreen].bounds.size.height);
-        CGFloat totalWidth =_imageSize + (self.starCount + 1 ) * self.spacing + self.starSize.width * self.starCount;
-        if (screenWidth < totalWidth) {
-            CGFloat newStarSize =(screenWidth - (_imageSize + (self.starCount + 1) * self.spacing)) / self.starCount;
-            self.starSize = CGSizeMake(newStarSize,newStarSize);
-        }
         [self setupButtons];
     }
     return self;
@@ -33,17 +25,8 @@
 - (instancetype)initWithCoder:(NSCoder *)coder {
     self = [super initWithCoder:coder];
     if (self) {
-        _imageSize = 90.0;
-        self.starSize = CGSizeMake(44.0, 44.0);
         self.starCount = 5;
-        self.spacing = 8;
-        [self updateButtonSelectionStates];
-        CGFloat screenWidth = MIN([UIScreen mainScreen].bounds.size.width,[UIScreen mainScreen].bounds.size.height);
-        CGFloat totalWidth =_imageSize + (self.starCount + 1 ) * self.spacing + self.starSize.width * self.starCount;
-        if (screenWidth < totalWidth) {
-            CGFloat newStarSize =(screenWidth - (_imageSize + (self.starCount + 1) * self.spacing)) / self.starCount;
-            self.starSize = CGSizeMake(newStarSize,newStarSize);
-        }
+        self.spacing = 0;
         [self setupButtons];
     }
     return self;
@@ -66,16 +49,20 @@
         [button setImage:filledStar forState:UIControlStateSelected];
         [button setImage:highlightedStar forState:UIControlStateHighlighted];
         button.translatesAutoresizingMaskIntoConstraints =false;
-        [button.heightAnchor constraintEqualToConstant:_starSize.height].active = true;
-        [button.widthAnchor constraintEqualToConstant:_starSize.width].active = true;
         button.accessibilityLabel=@"Set (i+1) star rating";
         [button addTarget:self action:@selector(ratingButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
         [self addArrangedSubview:button];
         [_ratingButtons addObject:button];
+        [NSLayoutConstraint activateConstraints:@[
+                                                  [button.widthAnchor constraintEqualToAnchor:button.heightAnchor],
+                                                  [button.heightAnchor constraintLessThanOrEqualToConstant:MAX([UIScreen mainScreen].bounds.size.width,[UIScreen mainScreen].bounds.size.height)/15],
+                                                  ]];
     }
+    self.distribution = UIStackViewDistributionEqualSpacing;
+    
 }
 
--(void)setRating:(NSUInteger)rating {
+-(void) setRating:(NSUInteger)rating {
     _rating = rating;
     [self updateButtonSelectionStates];
 }

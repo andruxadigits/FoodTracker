@@ -36,12 +36,15 @@ static NSString *const kRatingKey = @"rating";
     }
     return self;
 }
-
 - (instancetype)initWithCoder:(NSCoder *)aDecoder {
-    NSString *name = [aDecoder decodeObjectForKey:kNameKey];
-    UIImage *photo = [aDecoder decodeObjectForKey:kPhotoKey];
-    NSNumber *rating = [aDecoder decodeObjectForKey:kRatingKey];
-    return [self initWithName:name photo:photo rating:rating];
+    self = [super init];
+    if (self) {
+        NSString *name = [aDecoder decodeObjectForKey:kNameKey];
+        UIImage *photo = [aDecoder decodeObjectForKey:kPhotoKey];
+        NSNumber *rating = [aDecoder decodeObjectForKey:kRatingKey];
+        self = [[Meal alloc] initWithName:name photo:photo rating:rating];
+    }
+    return self;
 }
 
 - (void)encodeWithCoder:(NSCoder *)aCoder {
