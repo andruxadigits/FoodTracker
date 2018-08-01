@@ -38,6 +38,7 @@
     [self.stackView addArrangedSubview:self.ratingControl];
     CGFloat height = MAX([UIScreen mainScreen].bounds.size.width,[UIScreen mainScreen].bounds.size.height)/5;
     CGFloat spacing = height / 5;
+    [self.stackView setSpacing:spacing];
     [self.nameTextField setFont:[UIFont systemFontOfSize:height/5]];
     [NSLayoutConstraint activateConstraints:@[
                                               [self.stackView.leftAnchor constraintEqualToAnchor:self.view.leftAnchor constant:spacing],
@@ -46,10 +47,8 @@
                                               [self.stackView.bottomAnchor constraintLessThanOrEqualToAnchor:self.view.bottomAnchor constant:-spacing],
                                               [self.nameTextField.heightAnchor constraintEqualToConstant:height/3],
                                               [self.nameTextField.trailingAnchor constraintEqualToAnchor:self.stackView.trailingAnchor],
-                                              [self.photoImageView.topAnchor constraintEqualToAnchor:self.nameTextField.bottomAnchor constant:spacing],
                                               [self.photoImageView.heightAnchor constraintEqualToAnchor:self.photoImageView.widthAnchor],
-                                              [self.ratingControl.topAnchor constraintEqualToAnchor:self.photoImageView.bottomAnchor constant:spacing]
-                                              ]];
+                                                ]];
     self.view.backgroundColor = [UIColor whiteColor];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSave target:self action:@selector(didSelectSaveButton)];
     [self updateSaveButtonState];

@@ -20,6 +20,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.navigationItem.title = @"Your meals";
+    CGFloat rowHeight = MAX([UIScreen mainScreen].bounds.size.width,[UIScreen mainScreen].bounds.size.height)/6;
+    [self.tableView setRowHeight:rowHeight];
     [self.tableView registerClass:[MealTableViewCell class] forCellReuseIdentifier:NSStringFromClass([MealTableViewCell class])];
     self.navigationItem.leftBarButtonItem = self.editButtonItem;
     NSMutableArray *savedMeals= [self loadMeals];

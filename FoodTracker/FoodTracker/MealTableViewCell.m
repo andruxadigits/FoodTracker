@@ -20,15 +20,12 @@
         [self.contentView addSubview:self.photoImageView];
         CGFloat cellHeight = MAX([UIScreen mainScreen].bounds.size.width,[UIScreen mainScreen].bounds.size.height)/6;
         CGFloat cellSpacing = cellHeight / 10;
-        [self.nameLabel setFont:[UIFont systemFontOfSize:cellHeight/5]];
         [NSLayoutConstraint activateConstraints:@[
-                                                  [self.contentView.heightAnchor  constraintEqualToConstant:cellHeight],
-                                                 
                                                   [self.photoImageView.leftAnchor constraintEqualToAnchor:self.contentView.leftAnchor  constant: cellSpacing],
-                                                  [self.photoImageView.heightAnchor constraintEqualToAnchor:self.contentView.heightAnchor],
+                                                  [self.photoImageView.heightAnchor constraintEqualToAnchor:self.contentView.heightAnchor multiplier:1.0],
                                                   [self.photoImageView.topAnchor constraintEqualToAnchor:self.contentView.topAnchor],
                                                   [self.photoImageView.bottomAnchor constraintEqualToAnchor:self.contentView.bottomAnchor],
-                                                  [self.photoImageView.widthAnchor constraintEqualToAnchor:self.photoImageView.heightAnchor],
+                                                  [self.photoImageView.widthAnchor constraintEqualToAnchor:self.photoImageView.heightAnchor multiplier:1.0],
                                                   
                                                   [self.nameLabel.leftAnchor constraintEqualToAnchor:self.photoImageView.rightAnchor constant:cellSpacing],
                                                   [self.nameLabel.rightAnchor constraintEqualToAnchor:self.contentView.rightAnchor constant:-cellSpacing],
@@ -39,6 +36,7 @@
                                                   [self.ratingControl.topAnchor constraintEqualToAnchor:self.nameLabel.bottomAnchor constant:cellSpacing],
                                                   [self.ratingControl.rightAnchor constraintEqualToAnchor:self.contentView.rightAnchor constant:-cellSpacing],
                                                   ]];
+        [self.nameLabel setFont:[UIFont systemFontOfSize:cellHeight/5]];
     }
     return self;
 }
@@ -49,8 +47,9 @@
 
 - (UIImageView *) setupPhotoImage{
     UIImageView *photoImage =[UIImageView new];
-    photoImage.translatesAutoresizingMaskIntoConstraints = NO;
+    photoImage. translatesAutoresizingMaskIntoConstraints = NO;
     photoImage.contentMode = UIViewContentModeScaleAspectFit;
+    
     return photoImage;
 }
 - (UILabel *) setupNameLabel{
@@ -62,7 +61,7 @@
     RatingControl *ratingControl =[RatingControl new];
     ratingControl.userInteractionEnabled = NO;
     ratingControl.translatesAutoresizingMaskIntoConstraints = NO;
-    ratingControl.contentMode  = UIViewContentModeScaleAspectFit;
+    ratingControl.contentMode = UIViewContentModeScaleAspectFit;
     return ratingControl;
 }
 
