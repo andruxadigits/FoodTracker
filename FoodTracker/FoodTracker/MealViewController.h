@@ -7,11 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
+
 @class Meal;
+
 @import os.log;
+
 @protocol MealViewControllerDelegate <NSObject>
--(void) selectedSaveButton: (Meal *)selectedMeal;
+- (void)selectedSaveButton:(Meal *)selectedMeal;
 @end
+
 @interface MealViewController : UIViewController <UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 @property(nonatomic) Meal *meal;
 @property(nonatomic) NSObject <MealViewControllerDelegate> *delegate;

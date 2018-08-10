@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @protocol Coordinator <NSObject>
-- (void) start;
+- (void)start;
 @end

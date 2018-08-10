@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "Coordinator.h"
-@interface ApplicationCoordinator: NSObject <Coordinator>
-- (instancetype) initWithWindow:(UIWindow *)window;
+
+@interface ApplicationCoordinator : NSObject <Coordinator>
+- (instancetype)initWithWindow:(UIWindow *)window;
 @end

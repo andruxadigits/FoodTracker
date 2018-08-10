@@ -7,10 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+
 @class ApplicationCoordinator;
+
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
-@property (nonatomic) UIWindow *window;
-@property (nonatomic) ApplicationCoordinator *applicationCoordinator;
+@property(nonatomic) UIWindow *window;
+@property(nonatomic) ApplicationCoordinator *applicationCoordinator;
 
 @end
 

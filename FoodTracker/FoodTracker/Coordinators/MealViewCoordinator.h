@@ -8,9 +8,12 @@
 
 #import <UIKit/UIKit.h>
 #import "Coordinator.h"
+
 @protocol MealTableViewControllerDelegate;
 @class Meal;
+
 @interface MealViewCoordinator : NSObject <Coordinator>
--(instancetype) initWithPresenter:(UINavigationController *)presenter Meal:(Meal *)meal;
-@property (nonatomic) NSObject <MealTableViewControllerDelegate> *delegate;
+- (instancetype)initWithPresenter:(UINavigationController *)presenter Meal:(Meal *)meal;
+
+@property(nonatomic) NSObject <MealTableViewControllerDelegate> *delegate;
 @end

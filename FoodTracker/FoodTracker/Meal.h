@@ -9,11 +9,12 @@
 #import <UIKit/UIKit.h>
 
 @interface Meal : NSObject <NSCoding>
-@property (readonly,nonatomic) NSString *name;
-@property (readonly,nonatomic) UIImage *photo;
-@property (readonly,nonatomic) NSNumber *rating;
-@property (readonly,nonatomic) NSArray *Paths;
+@property(readonly, nonatomic) NSString *name;
+@property(readonly, nonatomic) UIImage *photo;
+@property(readonly, nonatomic) NSNumber *rating;
+@property(readonly, nonatomic) NSArray *Paths;
 
--(instancetype)initWithName:(NSString *)name photo:(UIImage * )photo rating:(NSNumber *)rating;
+- (instancetype)initWithName:(NSString *)name photo:(UIImage *)photo rating:(NSNumber *)rating;
+
 + (NSString *)archiveURL;
 @end

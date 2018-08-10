@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "ApplicationCoordinator.h"
+
 @interface AppDelegate ()
 
 @end

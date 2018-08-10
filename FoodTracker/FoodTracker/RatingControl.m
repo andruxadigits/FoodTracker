@@ -1,18 +1,18 @@
 #import "RatingControl.h"
 
-@interface RatingControl()
-@property (nonatomic, assign) CGSize starSize;
-@property (nonatomic, assign) int starCount;
+@interface RatingControl ()
+@property(nonatomic, assign) CGSize starSize;
+@property(nonatomic, assign) int starCount;
 @end
 
 
-@implementation RatingControl{
+@implementation RatingControl {
     NSMutableArray *_ratingButtons;
     CGFloat _imageSize;
 }
 
 //MARK: Init
-- (instancetype) initWithFrame:(CGRect)frame {
+- (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
         self.starCount = 5;
@@ -22,6 +22,7 @@
     }
     return self;
 }
+
 - (instancetype)initWithCoder:(NSCoder *)coder {
     self = [super initWithCoder:coder];
     if (self) {
@@ -33,14 +34,14 @@
 }
 
 //MARK: Private Methods
--(void)setupButtons{
-    for (int i = 0;i < [_ratingButtons count];i++) {
+- (void)setupButtons {
+    for (int i = 0; i < [_ratingButtons count]; i++) {
         [_ratingButtons[i] removeArrangedSubview:_ratingButtons[i]];
         [_ratingButtons[i] removeFromSuperview];
     }
     [_ratingButtons removeAllObjects];
     _ratingButtons = [[NSMutableArray alloc] initWithCapacity:_starCount];
-    for (int i = 0;i < _starCount;i++) {
+    for (int i = 0; i < _starCount; i++) {
         UIButton *button = [[UIButton alloc] init];
         UIImage *filledStar = [UIImage imageNamed:@"filledStar"];
         UIImage *emptyStar = [UIImage imageNamed:@"emptyStar"];
@@ -48,37 +49,36 @@
         [button setImage:emptyStar forState:UIControlStateNormal];
         [button setImage:filledStar forState:UIControlStateSelected];
         [button setImage:highlightedStar forState:UIControlStateHighlighted];
-        button.translatesAutoresizingMaskIntoConstraints =false;
-        button.accessibilityLabel=@"Set (i+1) star rating";
+        button.translatesAutoresizingMaskIntoConstraints = false;
+        button.accessibilityLabel = @"Set (i+1) star rating";
         [button addTarget:self action:@selector(ratingButtonTapped:) forControlEvents:UIControlEventTouchUpInside];
         [self addArrangedSubview:button];
         [_ratingButtons addObject:button];
         [NSLayoutConstraint activateConstraints:@[
-                                                  [button.widthAnchor constraintEqualToAnchor:button.heightAnchor],
-                                                  [button.heightAnchor constraintLessThanOrEqualToConstant:MAX([UIScreen mainScreen].bounds.size.width,[UIScreen mainScreen].bounds.size.height)/15],
-                                                  ]];
+                [button.widthAnchor constraintEqualToAnchor:button.heightAnchor],
+                [button.heightAnchor constraintLessThanOrEqualToConstant:MAX([UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height) / 15],
+        ]];
     }
     self.distribution = UIStackViewDistributionEqualSpacing;
-    
+
 }
 
--(void) setRating:(NSUInteger)rating {
+- (void)setRating:(NSUInteger)rating {
     _rating = rating;
     [self updateButtonSelectionStates];
 }
 
--(void) updateButtonSelectionStates {
-    for (int i = 0;i < _starCount;i++) {
+- (void)updateButtonSelectionStates {
+    for (int i = 0; i < _starCount; i++) {
         [[_ratingButtons objectAtIndex:i] setSelected:i < self.rating];
-        
+
         NSString *hintString;
         if (i == self.rating) {
             hintString = @"Tap to reset the rating to zero.";
-        }
-        else{
+        } else {
             hintString = nil;
         }
-        
+
         NSString *valueString;
         switch (self.rating) {
             case 0:
@@ -93,17 +93,17 @@
         }
         [[_ratingButtons objectAtIndex:i] setAccessibilityHint:hintString];
         [[_ratingButtons objectAtIndex:i] setAccessibilityValue:valueString];
-        
+
     }
 }
+
 //MARK: button Action
--(void) ratingButtonTapped:(UIButton *)button {
+- (void)ratingButtonTapped:(UIButton *)button {
     NSUInteger index = [_ratingButtons indexOfObject:button];
     NSUInteger selectedRating = index + 1;
     if (selectedRating == self.rating) {
         self.rating = 0;
-    }
-    else {
+    } else {
         self.rating = selectedRating;
     }
     [self updateButtonSelectionStates];

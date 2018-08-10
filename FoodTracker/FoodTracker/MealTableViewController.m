@@ -10,28 +10,26 @@
 #import "Meal.h"
 #import "MealTableViewCell.h"
 #import "MealViewController.h"
-@interface MealTableViewController ()
-{
+
+@interface MealTableViewController () {
     NSMutableArray *meals;
 }
 @end
+
 @implementation MealTableViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.navigationItem.title = @"Your meals";
-    CGFloat rowHeight = MAX([UIScreen mainScreen].bounds.size.width,[UIScreen mainScreen].bounds.size.height)/6;
+    CGFloat rowHeight = MAX([UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height) / 6;
     [self.tableView setRowHeight:rowHeight];
     [self.tableView registerClass:[MealTableViewCell class] forCellReuseIdentifier:NSStringFromClass([MealTableViewCell class])];
-    self.navigationItem.leftBarButtonItem = self.editButtonItem;
-    NSMutableArray *savedMeals= [self loadMeals];
-    if (savedMeals!=nil)
-    {
-        meals=[[NSMutableArray alloc] initWithCapacity:savedMeals.count];
+    //  self.navigationItem.leftBarButtonItem = self.editButtonItem;
+    NSMutableArray *savedMeals = [self loadMeals];
+    if (savedMeals != nil) {
+        meals = [[NSMutableArray alloc] initWithCapacity:savedMeals.count];
         [meals addObjectsFromArray:savedMeals];
-    }
-    else
-    {
+    } else {
         [self loadSampleMeals];
     }
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(didSelectAddButton)];
@@ -42,7 +40,7 @@
 }
 //MARK: Private Methods
 
-- (void) loadSampleMeals {
+- (void)loadSampleMeals {
     meals = [[NSMutableArray alloc] initWithCapacity:3];
     UIImage *photo1 = [UIImage imageNamed:@"meal1"];
     UIImage *photo2 = [UIImage imageNamed:@"meal2"];
@@ -73,46 +71,45 @@
 }
 //MARK: Actions
 
-- (void) saveChangesInTableView:(Meal *)changedMeal{
-    NSIndexPath *selectedIndexPath=self.tableView.indexPathForSelectedRow;
-    if (selectedIndexPath)
-    {
+- (void)saveChangesInTableView:(Meal *)changedMeal {
+    NSIndexPath *selectedIndexPath = self.tableView.indexPathForSelectedRow;
+    if (selectedIndexPath) {
         //Update an existing meal.
         meals[selectedIndexPath.row] = changedMeal;
         [self.tableView reloadRowsAtIndexPaths:@[selectedIndexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
-        
-    }
-    else {
+
+    } else {
         //Add a new meal.
         NSIndexPath *newIndexPath;
-        newIndexPath=[NSIndexPath indexPathForRow:meals.count inSection:0];
+        newIndexPath = [NSIndexPath indexPathForRow:meals.count inSection:0];
         [meals addObject:changedMeal];
-        [self.tableView insertRowsAtIndexPaths:@[newIndexPath] withRowAnimation:UITableViewRowAnimationAutomatic ];
+        [self.tableView insertRowsAtIndexPaths:@[newIndexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
     }
     [self saveMeals];
 }
 
--(void) saveMeals {
-    BOOL isSuccessfulSave=[NSKeyedArchiver archiveRootObject:meals toFile:[Meal archiveURL]];
+- (void)saveMeals {
+    BOOL isSuccessfulSave = [NSKeyedArchiver archiveRootObject:meals toFile:[Meal archiveURL]];
     if (isSuccessfulSave) {
         os_log_debug(OS_LOG_DEFAULT, "Meals successfully saved.");
-    }
-    else {
+    } else {
         os_log_error(OS_LOG_DEFAULT, "Failed to save meals...");
     }
 }
--(NSMutableArray *) loadMeals {
-    NSMutableArray *Data=[NSKeyedUnarchiver unarchiveObjectWithFile:[Meal archiveURL]];
+
+- (NSMutableArray *)loadMeals {
+    NSMutableArray *Data = [NSKeyedUnarchiver unarchiveObjectWithFile:[Meal archiveURL]];
     NSInteger n = [Data count];
-    if (n==0) return nil;
+    if (n == 0) return nil;
     return Data;
 }
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     Meal *meal = meals[indexPath.row];
     [self.delegate didSelectMealFromTalbeView:meal];
 }
 
-- (void) didSelectAddButton{
+- (void)didSelectAddButton {
     Meal *meal = [[Meal alloc] initWithName:@"" photo:nil rating:nil];
     [self.delegate didSelectMealFromTalbeView:meal];
 }
@@ -122,11 +119,11 @@
     [super prepareForSegue:segue sender:sender];
     UIViewController *viewController = [segue destinationViewController];
     if ([viewController isKindOfClass:[MealViewController class]]) {
-        MealViewController *mealDetailViewController = (MealViewController *)viewController;
-        MealTableViewCell *selectedMealCell =sender;
+        MealViewController *mealDetailViewController = (MealViewController *) viewController;
+        MealTableViewCell *selectedMealCell = sender;
         NSIndexPath *indexPath = [self.tableView indexPathForCell:selectedMealCell];
         Meal *selectedMeal = meals[indexPath.row];
-        mealDetailViewController.meal=selectedMeal;
+        mealDetailViewController.meal = selectedMeal;
     }
 }
 /*
@@ -147,7 +144,7 @@
         [self saveMeals];
         [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
     } else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        
+
         // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
     }
 }
